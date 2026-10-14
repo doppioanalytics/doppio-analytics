@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seu Nome | Análise e Ciência de Dados</title>
+<meta name="description" content="Portfólio de análises exploratórias, modelos de machine learning e dashboards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EEF2F0;
+    --ink: #16302B;
+    --muted: #55696A;
+    --line: #C9D4D1;
+    --accent: #3158D6;
+    --accent-soft: #DCE4FA;
+    --head: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101C1A; --ink: #E6EFEC; --muted: #93A8A4; --line: #2A3D3A;
+      --accent: #8FA8FF; --accent-soft: #1E2A4D;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--body); font-size: 1.125rem; line-height: 1.65;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 1.5rem; }
+
+  header.top { padding: 1.25rem 0; }
+  header.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .brand { font-family: var(--head); font-weight: 800; font-size: 1.1rem; text-decoration: none; color: var(--ink); }
+  nav a { font-family: var(--head); font-weight: 500; font-size: 1rem; margin-left: 1.25rem; color: var(--ink); text-decoration: none; }
+  nav a:hover { color: var(--accent); }
+
+  .hero { position: relative; padding: 4rem 0 5rem; overflow: hidden; }
+  .hero svg { position: absolute; right: -20px; top: 10px; width: min(460px, 70vw); height: auto; opacity: .9; pointer-events: none; }
+  .hero .dot { fill: var(--accent); }
+  .hero .trend { stroke: var(--ink); stroke-width: 2.5; stroke-dasharray: 2 7; stroke-linecap: round; fill: none; }
+  .hero .axis { stroke: var(--line); stroke-width: 2; }
+  .hero h1 {
+    position: relative; font-family: var(--head); font-weight: 800;
+    font-size: clamp(2.6rem, 8vw, 5rem); line-height: 1.02; letter-spacing: -0.03em;
+    margin: 0 0 1.5rem; max-width: 12em;
+  }
+  .hero p { position: relative; max-width: 34em; color: var(--muted); margin: 0 0 1.75rem; }
+  .btn {
+    display: inline-block; font-family: var(--head); font-weight: 700; font-size: 1rem;
+    background: var(--ink); color: var(--bg); padding: .75rem 1.4rem; border-radius: 999px; text-decoration: none;
+  }
+  .btn:hover { background: var(--accent); color: #fff; }
+  .btn.ghost { background: transparent; color: var(--ink); border: 2px solid var(--ink); margin-left: .5rem; }
+  .btn.ghost:hover { background: var(--ink); color: var(--bg); }
+
+  section { padding: 3rem 0; border-top: 1px solid var(--line); }
+  h2 { font-family: var(--head); font-weight: 700; font-size: 2rem; letter-spacing: -0.02em; margin: 0 0 1.75rem; }
+
+  .project { display: grid; grid-template-columns: 1fr auto; gap: .5rem 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+  .project:first-of-type { padding-top: 0; }
+  .project h3 { font-family: var(--head); font-weight: 700; font-size: 1.35rem; margin: 0 0 .35rem; letter-spacing: -0.01em; }
+  .project p { margin: 0 0 .6rem; color: var(--muted); font-size: 1.05rem; }
+  .tools { font-family: var(--head); font-size: .9rem; color: var(--muted); }
+  .kind {
+    align-self: start; font-family: var(--head); font-weight: 700; font-size: .85rem;
+    background: var(--accent-soft); color: var(--accent); padding: .2rem .75rem; border-radius: 999px; white-space: nowrap;
+  }
+  .links { grid-column: 1 / -1; font-family: var(--head); font-weight: 500; }
+  .links a { margin-right: 1.25rem; }
+
+  .about { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; }
+  .about ul { list-style: none; margin: 0; padding: 0; font-family: var(--head); }
+  .about li { padding: .4rem 0; border-bottom: 1px solid var(--line); }
+  .about h3 { font-family: var(--head); font-size: 1rem; margin: 0 0 .5rem; }
+
+  footer { padding: 2.5rem 0 3rem; color: var(--muted); font-size: .95rem; border-top: 1px solid var(--line); }
+
+  @media (max-width: 640px) {
+    .about { grid-template-columns: 1fr; }
+    .project { grid-template-columns: 1fr; }
+    .hero svg { opacity: .35; }
+    nav a { margin: 0 1rem 0 0; }
+    .btn.ghost { margin: .75rem 0 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">Seu Nome</a>
+    <nav aria-label="Principal">
+      <a href="#projetos">Projetos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <svg viewBox="0 0 460 340" aria-hidden="true">
+        <line class="axis" x1="30" y1="310" x2="440" y2="310"/>
+        <line class="axis" x1="30" y1="20" x2="30" y2="310"/>
+        <path class="trend" d="M40 285 C160 250 260 170 435 40"/>
+        <g class="dot">
+          <circle cx="70" cy="270" r="6"/><circle cx="105" cy="290" r="6"/><circle cx="130" cy="240" r="6"/>
+          <circle cx="170" cy="255" r="6"/><circle cx="205" cy="205" r="6"/><circle cx="235" cy="225" r="6"/>
+          <circle cx="270" cy="160" r="6"/><circle cx="300" cy="185" r="6"/><circle cx="330" cy="120" r="6"/>
+          <circle cx="365" cy="95" r="6"/><circle cx="395" cy="70" r="6"/><circle cx="420" cy="55" r="6"/>
+        </g>
+      </svg>
+      <h1>Transformo dados em respostas e ações factuais!</h1>
+      <p>Sou Gustavo, Analista de Dados com experiência em Crédito, Energia e Riscos, atualmente aprendendo o básico de Ciência de Dados - 
+        como alguns modelos de regressão linear, logística e métodos para classificação.
+        Aqui você encontra todos os meus projetos incluindo análises exploratórias, modelos e dashboards, com código e raciocínio à mostra!</p>
+      <a class="btn" href="#projetos">Ver projetos</a>
+      <a class="btn ghost" href="#contato">Falar comigo</a>
+    </div>
+  </div>
+
+  <section id="projetos">
+    <div class="wrap">
+      <h2>Projetos</h2>
+
+      <article class="project">
+        <div>
+          <h3>What Drives Google Play App Ratings?</h3>
+          <p>Em uma ou duas frases: neste projeto, procurei descobrir quais fatores influenciam o rating de um app na Play Store, 
+            e porquê isso importa para o desenvolvedor de apps.</p>
+          <span class="tools">Python, pandas, seaborn, scikit.statistics</span>
+        </div>
+        <span class="kind">Notebook</span>
+        <div class="links">
+          <a href="#">Ler análise</a>
+          <a href="https://github.com/doppioanalytics/google-play-store-app-ratings-analysis"> Código no GitHub</a>
+        </div>
+      </article>
+
+     <!--  <article class="project">
+        <div>
+          <h3>Título do seu projeto de modelagem</h3>
+          <p>Qual problema o modelo resolve, quais algoritmos você comparou e qual foi o resultado.</p>
+          <span class="tools">Python, scikit-learn</span>
+        </div>
+        <span class="kind">Machine learning</span>
+        <div class="links">
+          <a href="#">Ler análise</a>
+          <a href="#">Código no GitHub</a>
+        </div>
+      </article>
+      -->
+
+      <!-- <article class="project">
+        <div>
+          <h3>Título do seu dashboard</h3>
+          <p>O que o dashboard mostra e quem poderia usá-lo para tomar decisões.</p>
+          <span class="tools">Streamlit, plotly</span>
+        </div>
+        <span class="kind">Dashboard</span>
+        <div class="links">
+          <a href="#">Abrir dashboard</a>
+          <a href="#">Código no GitHub</a>
+        </div>
+      </article>
+      -->
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="wrap about">
+      <div>
+        <h2>Sobre</h2>
+        <p>Escreva aqui um parágrafo curto: sua formação, o que te atrai em dados e o tipo de problema que você gosta de resolver.</p>
+      </div>
+      <div>
+        <h3>Ferramentas</h3>
+        <ul>
+          <li>Python</li>
+          <li>SQL</li>
+          <li>pandas e scikit-learn</li>
+          <li>Streamlit</li>
+          <li>Git e GitHub</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="wrap">
+      <h2>Contato</h2>
+      <p>
+        <a href="mailto:seuemail@exemplo.com">seuemail@exemplo.com</a><br>
+        <a href="https://github.com/seu-usuario">github.com/seu-usuario</a><br>
+        <a href="https://linkedin.com/in/seu-usuario">linkedin.com/in/seu-usuario</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Seu Nome</div>
+</footer>
+
+</body>
+</html>
